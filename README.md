@@ -1,1 +1,2 @@
-CRM Dashboard [a link](https://design-replica.vercel.app/)
+Link to CRM Dashboard
+https://design-replica.vercel.app/
