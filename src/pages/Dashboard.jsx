@@ -1,6 +1,6 @@
-import React, {useEffect} from 'react'
 
-import { Link } from 'react-router-dom'
+
+
 
 import Chart from 'react-apexcharts'
 
@@ -10,72 +10,107 @@ import StatusCard from '../components/status-card/StatusCard'
 
 import Table from '../components/table/Table'
 
-import Badge from '../components/badge/Badge'
+
 
 import statusCards from '../assets/JsonData/status-card-data.json'
 
-const chartOptions = {
+var chartOptions = {
     series: [{
-        name: 'Online Customers',
+        name: 'New Ticket',
+        type: 'column',
         data: [40,70,20,90,36,80,30,91,60]
     }, {
-        name: 'Store Customers',
+        name: 'Open Ticket',
+        type: 'column',
         data: [40, 30, 70, 80, 40, 16, 40, 20, 51, 10]
+    },
+    {
+        name: 'Pending',
+        type: 'column',
+        data: [3,6,13,60,32,4,6,12,41,13]
+    },
+    {
+        name: 'Total Resolved',
+        type: 'column',
+        data: [17,17,18,51,31,41,61,22,33,44]
+    },
+    {
+        name: 'Ticket Expired',
+        type: 'column',
+        data: [33,22,66,12,41,36,43,23,67,12]
     }],
     options: {
         color: ['#6ab04c', '#2980b9'],
-        chart: {
-            background: 'transparent'
         },
+        chart: {
+            height: 400,
+            type: 'line',
+            stacked: false
+          },
         dataLabels: {
             enabled: false
         },
         stroke: {
-            curve: 'smooth'
+            width: [1,1,4]
         },
-        xaxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep']
-        },
-        legend: {
-            position: 'top'
-        },
-        grid: {
-            show: false
-        }
+        title: {
+            text: 'Ticket Status',
+            align: 'left',
+            offsetX: 1200
+          },
+          legend: {
+            horizontalAlign: 'left',
+            offsetX: 40
+          },
+          xaxis: {
+            categories: ["2May", "4May", "6May", "8May", "10may","12May","14May","16May"],
+          },
+          yaxis: [
+            {
+              axisTicks: {
+                show: true,
+              },
+              axisBorder: {
+                show: true,
+                color: '#008FFB'
+              },
+              labels: {
+                style: {
+                  colors: '#008FFB',
+                }
+              }
+            }
+        ]
+
+            
     }
-}
+
 
 const topCustomers = {
     head: [
-        'user',
-        'total orders',
-        'total spending'
+        
     ],
     body: [
         {
-            "username": "john doe",
-            "order": "490",
-            "price": "$15,870"
+            "username": <b>John Doe</b> ,
+            
+            
         },
         {
-            "username": "frank iva",
-            "order": "250",
-            "price": "$12,251"
+            "username": <b>Niya Yansee</b>,
+            
         },
         {
-            "username": "anthony baker",
-            "order": "120",
-            "price": "$10,840"
+            "username": <b>Priya Jolankar</b>,
+           
         },
         {
-            "username": "frank iva",
-            "order": "110",
-            "price": "$9,251"
+            "username": <b>Priti Oberoi</b>,
+            
         },
         {
-            "username": "anthony baker",
-            "order": "80",
-            "price": "$8,840"
+            "username": <b>Ayushi Hira</b>,
+            
         }
     ]
 }
@@ -92,89 +127,19 @@ const renderCusomerBody = (item, index) => (
     </tr>
 )
 
-const latestOrders = {
-    header: [
-        "order id",
-        "user",
-        "total price",
-        "date",
-        "status"
-    ],
-    body: [
-        {
-            id: "#OD1711",
-            user: "john doe",
-            date: "17 Jun 2021",
-            price: "$900",
-            status: "shipping"
-        },
-        {
-            id: "#OD1712",
-            user: "frank iva",
-            date: "1 Jun 2021",
-            price: "$400",
-            status: "paid"
-        },
-        {
-            id: "#OD1713",
-            user: "anthony baker",
-            date: "27 Jun 2021",
-            price: "$200",
-            status: "pending"
-        },
-        {
-            id: "#OD1712",
-            user: "frank iva",
-            date: "1 Jun 2021",
-            price: "$400",
-            status: "paid"
-        },
-        {
-            id: "#OD1713",
-            user: "anthony baker",
-            date: "27 Jun 2021",
-            price: "$200",
-            status: "refund"
-        }
-    ]
-}
-
-const orderStatus = {
-    "shipping": "primary",
-    "pending": "warning",
-    "paid": "success",
-    "refund": "danger"
-}
-
-const renderOrderHead = (item, index) => (
-    <th key={index}>{item}</th>
-)
-
-const renderOrderBody = (item, index) => (
-    <tr key={index}>
-        <td>{item.id}</td>
-        <td>{item.user}</td>
-        <td>{item.price}</td>
-        <td>{item.date}</td>
-        <td>
-            <Badge type={orderStatus[item.status]} content={item.status}/>
-        </td>
-    </tr>
-)
-
 const Dashboard = () => {
 
     const themeReducer = useSelector(state => state.ThemeReducer.mode)
 
     return (
         <div>
-            <h2 className="page-header">Dashboard</h2>
+            <h2 className="page-header">Hi, Octavia!</h2>
             <div className="row">
-                <div className="col-6">
+                <div className="row-2">
                     <div className="row">
                         {
                             statusCards.map((item, index) => (
-                                <div className="col-6" key={index}>
+                                <div className="row-1" key={index}>
                                     <StatusCard
                                         icon={item.icon}
                                         count={item.count}
@@ -198,14 +163,14 @@ const Dashboard = () => {
                             }}
                             series={chartOptions.series}
                             type='line'
-                            height='100%'
+                            height='200%'
                         />
                     </div>
                 </div>
-                <div className="col-4">
+                <div className="col-6">
                     <div className="card">
                         <div className="card__header">
-                            <h3>top customers</h3>
+                            <h3>Top Agents</h3>
                         </div>
                         <div className="card__body">
                             <Table
@@ -215,31 +180,13 @@ const Dashboard = () => {
                                 renderBody={(item, index) => renderCusomerBody(item, index)}
                             />
                         </div>
-                        <div className="card__footer">
-                            <Link to='/'>view all</Link>
-                        </div>
+                        
                     </div>
                 </div>
-                <div className="col-8">
-                    <div className="card">
-                        <div className="card__header">
-                            <h3>latest orders</h3>
-                        </div>
-                        <div className="card__body">
-                            <Table
-                                headData={latestOrders.header}
-                                renderHead={(item, index) => renderOrderHead(item, index)}
-                                bodyData={latestOrders.body}
-                                renderBody={(item, index) => renderOrderBody(item, index)}
-                            />
-                        </div>
-                        <div className="card__footer">
-                            <Link to='/'>view all</Link>
-                        </div>
-                    </div>
+                
                 </div>
             </div>
-        </div>
+        
     )
 }
 

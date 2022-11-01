@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 import './sidebar.css'
 
-import logo from '../../assets/images/logo.png'
+import logo_dash from '../../assets/images/logo_dash.jpg'
 
 import sidebar_items from '../../assets/JsonData/sidebar_routes.json'
 
@@ -31,7 +31,7 @@ const Sidebar = props => {
     return (
         <div className='sidebar'>
             <div className="sidebar__logo">
-                <img src={logo} alt="company logo" />RISK RADAR
+                <img src={logo_dash} alt="company logo" /><b>WHATCS</b>
             </div>
             {
                 sidebar_items.map((item, index) => (
